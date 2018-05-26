@@ -1,0 +1,722 @@
+:root {
+  --background-color: #555560;
+  --timetable-color: #222F3D;
+  --shift-bar-odd-color: #42B34F;
+  --shift-bar-even-color: #5BA2AD;
+}
+
+body {
+  overflow: hidden;
+  font-family: 'Open Sans', Roboto, sans-serif;
+  /* height: 200vh; (added with js)*/
+  /* width: calc(100vw - 20px); */
+  width: 100vw;
+  background-color: var(--background-color, #555560) /* #555560 */;
+  color: #ccc;
+  margin: 0;
+  padding: 0;
+  /* display: flex; */
+  /* flex-direction: column; */
+  /* align-items: center; */
+}
+
+
+/****************************************
+ HEADER (incl nav bar)
+****************************************/
+
+header {
+  margin: 0;
+}
+
+.h1-nav-bar, .h2-settings, h3 {
+  text-align: center;
+  margin: 0;
+}
+
+.h1-nav-bar {
+  margin-top: 10px;
+}
+
+.h2-settings {
+  font-size: 1.1em;
+}
+
+nav {
+  position: fixed;
+  top: 0;
+  width: 100vw;
+  height: 60px;
+  margin: 0 0 auto 0;
+  background-color: #121F2D;
+  color: var(--shift-bar-even-color, #5BA2AD); /* #5BA2AD */; /* #42B34F; #80ff80; */
+  box-shadow: 0 4px 8px 2px rgba(0, 0, 0, 0.19), 0 6px 20px 2px rgba(0, 0, 0, 0.20);
+  border-bottom: 1px solid black;
+  z-index: 5;
+}
+
+#todayDateInstance {
+  font-size: 0.9em;
+}
+
+#sessionTimeComponent {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  width: 230px;
+  margin: 0;
+  font-size: 0.8em;
+}
+
+
+/***************************************
+ HOME PAGE (WELCOME PAGE)
+***************************************/
+
+#welcome-page {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  position: absolute;
+  overflow: hidden;
+  /* height: 100vh; */
+  width: 100vw;
+  top: 0;
+  /* left: 0;  (see class)*/
+  /* background-color: */
+  background: linear-gradient(45deg, #42b34f 0%, #5ba2ad 60%, #72746d 85%, #222f3d 100%);
+  margin: 0;
+  padding-bottom: 10px;
+  min-height: 100vh;
+  width: 100vw;
+  /* -webkit-transition: left 0.5s ease;
+  -moz-transition: left 0.5s ease;
+  -o-transition: left 0.5s ease;
+  transition: left 0.5s ease; */
+  -webkit-transition: transform 0.5s ease;
+  -moz-transition: transform 0.5s ease;
+  -o-transition: transform 0.5s ease;
+  transition: transform 0.5s ease;
+  z-index: 6;
+}
+
+.h1-welcome, .h2-welcome {
+  text-align: center;
+  margin-bottom: 10px;
+}
+
+.welcome-header {
+  width: 400px;
+}
+
+.big {
+  font-size: 3em;
+  margin-top: 110px;
+}
+
+a {
+  text-decoration: none;
+  color: var(--timetable-color, #222F3D); /* #222F3D */
+}
+
+ul {
+  align-items: flex-start;
+  flex-direction: row;
+  list-style-type: none;
+}
+
+#get-started {
+  color: var(--timetable-color, #222F3D); /* #222F3D */
+  font-size: 1.5em;
+}
+
+#get-started:hover {
+  cursor: pointer;
+}
+
+/* .home {
+  background: linear-gradient(45deg, #42b34f 0%,#5ba2ad 60%,
+    #72746d 85%,#222f3d 100%);
+} */
+
+
+/**************************************
+ SCHEDULE PAGE
+**************************************/
+
+#schedule-container {
+  height: 200vh;
+  flex-direction: column;
+  align-items: center;
+}
+
+#schedule {
+  position: relative;
+  left: -10px;
+  display: flex;
+  flex-direction: row;
+  background-color: var(--timetable-color, #222F3D); /* #222F3D */
+  margin: 85px 0 0 0;
+  padding: 0;
+  padding-bottom: 5px;
+  height: 100%;
+  width: 95%;
+  box-shadow: 0 4px 8px 2px rgba(0, 0, 0, 0.19), 0 6px 20px 2px rgba(0, 0, 0, 0.20);
+}
+
+#left-legend {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  width: 10%;
+}
+
+#upper-left-square {
+  height: 3%;
+  width: 100%;
+}
+
+#days-of-week {
+  display: flex;
+  flex-direction: column;
+  height: 97%;
+  width: 100%;
+  text-align: center;
+  /* justify-content: flex-start; */
+  /* align-items: baseline; */
+  /* align-content: flex-start; */
+}
+
+#schedule-grid {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  width: 90%;
+}
+
+[id*="vertical-line"] {
+  display: inherit;
+  position: absolute;
+  height: 100%;
+  width: 1px;
+  background-color: #555;
+  z-index: 1;
+}
+
+#vertical-line1 {
+  left: calc(10% + (90% / 15));
+}
+#vertical-line2 {
+  left: calc(10% + (90% / 15 * 2));
+}
+#vertical-line3 {
+  left: calc(10% + (90% / 15 * 3));
+}
+#vertical-line4 {
+  left: calc(10% + (90% / 15 * 4));
+}
+#vertical-line5 {
+  left: calc(10% + (90% / 15 * 5));
+}
+#vertical-line6 {
+  left: calc(10% + (90% / 15 * 6));
+}
+#vertical-line7 {
+  left: calc(10% + (90% / 15 * 7));
+}
+#vertical-line8 {
+  left: calc(10% + (90% / 15 * 8));
+}
+#vertical-line9 {
+  left: calc(10% + (90% / 15 * 9));
+}
+#vertical-line10 {
+  left: calc(10% + (90% / 15 * 10));
+}
+#vertical-line11 {
+  left: calc(10% + (90% / 15 * 11));
+}
+#vertical-line12 {
+  left: calc(10% + (90% / 15 * 12));
+}
+#vertical-line13 {
+  left: calc(10% + (90% / 15 * 13));
+}
+#vertical-line14 {
+  left: calc(10% + (90% / 15 * 14));
+}
+
+#column-titles {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  height: 3%;
+  width: 100%;
+  border-bottom: 2px solid #ccc;
+  z-index: 3;
+}
+
+#day-rows {
+  display: flex;
+  flex-direction: column;
+  height: 97%;
+  width: 100%;
+}
+
+#column-titles, #days-of-week {
+  font-size: 2vh;
+  text-align: center;
+}
+
+#days-of-week span {
+  width: 100px;
+  text-decoration: underline;
+}
+
+.row, #days-of-week span {
+  height: calc(100% / 7 - 2px);
+  width: 100%;
+  margin: 0;
+  padding: 0;
+}
+
+.row {
+  margin-top: 2px;
+  border-bottom: 2px solid #ccc;
+  z-index: 3;
+}
+
+.time {
+  text-align: left;
+  margin: 0;
+  padding: 0;
+  width: calc(100% / 15);
+}
+
+.shift1 {
+  background-color: var(--shift-bar-odd-color, #42B34F); /* #42B34F */;
+}
+
+.shift2 {
+  background-color: var(--shift-bar-even-color, #5BA2AD); /* #5BA2AD */;
+}
+
+.shift3 {
+  background-color: var(--shift-bar-odd-color, #42B34F); /* #42B34F */;
+}
+
+.shift4 {
+  background-color: var(--shift-bar-even-color, #5BA2AD); /* #5BA2AD */;
+}
+
+.shift5 {
+  background-color: var(--shift-bar-odd-color, #42B34F); /* #42B34F */;
+}
+
+.shift6 {
+  background-color: var(--shift-bar-even-color, #5BA2AD); /* #5BA2AD */;
+}
+
+.shift7 {
+  background-color: var(--shift-bar-odd-color, #42B34F); /* #42B34F */;
+}
+
+[class*="shift"] {
+  display: block;
+  height: calc(100% / 7 - 8px);
+  /* float: left; */
+  box-shadow: 0 2px 4px 1px rgba(0, 0, 0, 0.19), 0 3px 10px 1px rgba(0, 0, 0, 0.20);
+  margin-top: 2px;
+  float-: none;
+  font-size: 2vh;
+  font-weight: bold;
+  color: var(--timetable-color, #222F3D); /* #222F3D */
+  /* border: 1px solid black; */
+  padding: 0 5px 5px 5px;
+  box-sizing: border-box;         /* Opera/IE 8+ */
+  -webkit-box-sizing: border-box; /* Safari/Chrome, other WebKit */
+  -moz-box-sizing: border-box;    /* Firefox, other Gecko */
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  z-index: 2;
+}
+
+[id*="day"] .shift1 {
+  position: relative;
+  left: 0;
+  width: 0;
+}
+
+[id*="day"] .shift2 {
+  position: relative;
+  left: 0;
+  width: 0;
+}
+
+[id*="day"] .shift3 {
+  position: relative;
+  left: 0;
+  width: 0;
+}
+
+[id*="day"] .shift4 {
+  position: relative;
+  left: 0;
+  width: 0;
+}
+
+[id*="day"] .shift5 {
+  position: relative;
+  left: 0;
+  width: 0;
+}
+
+[id*="day"] .shift6 {
+  position: relative;
+  left: 0;
+  width: 0;
+}
+
+[id*="day"] .shift7 {
+  position: relative;
+  left: 0;
+  width: 0;
+}
+
+section {
+  display: inline;
+}
+
+
+/**************************************
+ SETTINGS PAGE (MAIN MENU)
+**************************************/
+
+aside {
+  display: block;
+  position: absolute;
+  overflow: hidden;
+  top: 0;
+  left: 0;
+  background-color: var(--timetable-color, #222F3D); /* #222F3D */
+  margin: 0;
+  padding-bottom: 10px;
+  min-height: 100vh;
+  width: 100vw;
+  /* -webkit-transition: left 0.5s ease;
+  -moz-transition: left 0.5s ease;
+  -o-transition: left 0.5s ease;
+  transition: left 0.5s ease; */
+  -webkit-transition: transform 0.5s ease;
+  -moz-transition: transform 0.5s ease;
+  -o-transition: transform 0.5s ease;
+  transition: transform 0.5s ease;
+  z-index: 4;
+}
+
+#go-home, #hide-menu-nav, #show-menu-nav {
+  position: absolute;
+  display: inline;
+  padding: 0;
+  margin: 0;
+  /* top: 5px; */
+  bottom: 15px;
+  width: 35px;
+  height: 35px;
+  font-size: 1.8em;
+  color: #ccc;
+  background-color: transparent;
+  border-style: none;
+  outline: none;
+  transform: scale(1.1);
+}
+
+#go-home:hover, #hide-menu-nav:hover, #show-menu-nav:hover {
+  transform: scale(1.2);
+}
+
+#go-home {
+  right: 360px;
+}
+
+#show-menu-nav {
+  right: 320px;
+}
+
+#hide-menu-nav {
+  right: 280px;
+}
+
+#hide-menu-nav:disabled {
+  cursor: default;
+  color: #666;
+}
+
+#show-menu-nav:disabled {
+  cursor: default;
+  color: #666;
+}
+
+
+/**************************************
+ SETTINGS FORM
+**************************************/
+
+/* h5 {
+  display: inline;
+  padding: 0;
+} */
+
+.settings {
+  display: flex;
+  flex-direction: column;
+  background: linear-gradient(to top, #42B34F, #5BA2AD 80%);
+  /* background-color: #42B34F; */
+  color: #eee;
+  width: 500px;
+  margin: 85px 0 0 50px;
+  float: left;
+}
+
+.form-content {
+  display:inline-flex;
+  margin: 10px 7px 0 10px;
+  padding: 10px;
+}
+
+fieldset:first-of-type {
+  position: relative;
+  padding-bottom: 20px;
+  margin-bottom: 20px;
+}
+
+#avail-days {
+  position: relative;
+  left: 40px;
+}
+
+#add-employee, #add-business-day {
+  position: absolute;
+  bottom: 10px;
+  right: 10px;
+}
+
+#demo, #save-all, #clear-all, #create {
+  width: 100px;
+  height: 40px;
+  margin: 10px 10px;
+  background-color: var(--shift-bar-even-color, #5BA2AD); /* #5BA2AD */;
+  border: solid 2px black;
+  border-radius: 0.25em;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+}
+
+button:hover {
+  cursor: pointer;
+}
+
+#settings-buttons {
+  position: relative;
+  /* float: left; */
+  margin: 10px auto 10px auto;
+}
+
+#settings-buttons button {
+  font-size: 1.05em;
+  color: #eee;
+}
+
+#settings-buttons button:disabled {
+  color: #aaa;
+}
+
+
+/**************************************
+ DATA OBJECTS ON SETTINGS/MENU PAGE
+**************************************/
+
+#employee-object, #timetable-object {
+  position: relative;
+  float: left;
+  overflow: hidden;
+  width: 300px;
+  height: 500px;
+  margin: 85px 0 0 50px;
+  font-size: .8em;
+  color: #ccc;
+  border: 2px solid #ccc;
+}
+
+#assigned-shifts-object {
+  position: relative;
+  float: left;
+  overflow: hidden;
+  width: 300px;
+  height: 500px;
+  margin: 85px 0 0 50px;
+  font-size: .8em;
+  color: #ccc;
+  border: 2px solid #ccc;
+}
+
+h3 {
+  position: absolute;
+  width: 300px;
+  height: 30px;
+  text-align: center;
+  margin: 0;
+  padding: 0;
+}
+
+.fade-out-text {
+  position: absolute;
+  width: 100%;
+  height: 70px;
+  top: 430px;
+  background: linear-gradient(rgba(34,47,61,0), rgba(34,47,61,1));
+  z-index: 4;
+}
+
+.scroll-texts {
+  position: absolute;
+  top: 35px;
+  height: 460px;
+  width: 320px; /* extra 20px hides scrollbar */
+  overflow: hidden;
+  overflow-y: scroll;
+}
+
+.menu-text {
+  height: 450px;
+  padding: 7px;
+}
+
+
+/**************************************
+ CLASSES ADDED/REMOVED WITH JS
+**************************************/
+
+/* Apparently using translate to move elements is more performant than changing positioning, so we'll use translateX instead of changing the left position */
+.left-position-zero { /* used for welcome-page default */
+  left: 0;
+}
+
+.left-position-100 { /* no longer used */
+  left: -100vw;
+}
+
+/* Also, it looks like simply removing the class will reset the position. no need to have */
+.left-translateX-100vw {
+  transform: translateX(-100vw);
+}
+
+/* use these reusable classes instead
+ of setting display in ids. The order here is important as we are toggling display-flex */
+.display-none {
+  display: none;
+}
+
+.display-flex {
+  display: flex;
+}
+
+.display-block {
+  display: block;
+}
+
+
+/***************************************
+ MEDIA QUERIES
+***************************************/
+
+@media (max-width: 1609px) {
+  #assigned-shifts-object {
+    margin: 50px 0 0 50px;
+  }
+}
+
+@media (max-width: 1257px) {
+  #assigned-shifts-object {
+    margin: 50px 0 0 600px;
+  }
+  #timetable-object {
+    margin: 50px 0 0 50px;
+  }
+}
+
+@media (max-width: 980px) {
+  #sessionTimeComponent {
+    display: none;
+  }
+  #go-home {
+    right: 100px;
+  }
+  #show-menu-nav {
+    right: 60px;
+  }
+  #hide-menu-nav {
+    right: 20px;
+  }
+}
+
+@media (max-width: 903px) {
+  #employee-object {
+    margin: 50px 0 0 50px;
+  }
+  #assigned-shifts-object {
+    margin: 50px 0 0 50px;
+  }
+}
+
+@media (max-width: 558px) {
+  .settings {
+    margin-left: calc(100vw - 500px);
+  }
+}
+
+@media (max-width: 508px) {
+  .settings {
+    margin-left: 0;
+    width: 100vw;
+  }
+  fieldset:first-of-type {
+    padding-bottom: 35px;
+  }
+}
+
+@media (max-width: 358px) {
+  #assigned-shifts-object, #timetable-object, #employee-object {
+    margin-left: calc(100vw - 300px);
+  }
+}
+
+@media (max-height: 500px), (max-width: 770px) {
+  #todayDateInstance {
+    display: none;
+  }
+  .h1-nav-bar {
+    position: absolute;
+    left: 20px;
+  }
+}
+
+@media (orientation: portrait) {
+  #column-titles, #days-of-week {
+    font-size: 2vw;
+  }
+}
+
+@media (max-aspect-ratio: 4/5) {
+  .time {
+  transform: rotate(45deg) translateX(-1px) translateY(15px);
+  }
+}
+
+@media (max-height: 640px) {
+  .h1-welcome {
+    margin-top: 50px;
+  }
+}
